@@ -29,6 +29,17 @@ The `QuestionController` manages operations related to quiz questions. It provid
   - Endpoint: `POST /question/add`
   - Description: Adds a new question.
   - Request Body: `Questions` object containing the question details.
+  - {
+      "title": "string",
+      "option1": "String",
+      "option2": "String",
+      "option3": "String",
+      "option3": "String",
+      "rightAnswer": "String",
+      "difficultyLevel": "String",
+      "category": "String"
+    }
+
   - Response: `ResponseEntity<String>`
 
 - **Delete a Question**
