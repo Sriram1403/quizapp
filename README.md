@@ -11,13 +11,11 @@ This project is a Quiz Application with functionalities to manage quiz questions
 The `QuestionController` manages operations related to quiz questions. It provides the following endpoints:
 
 - **Get All Questions**
-
   - Endpoint: `GET /question/allQuestions`
   - Description: Fetches all questions.
   - Response: `ResponseEntity<List<Questions>>`
 
 - **Get Questions by Category**
-
   - Endpoint: `GET /question/category/{category}`
   - Description: Fetches all questions by the specified category.
   - Path Variable: 
@@ -25,25 +23,25 @@ The `QuestionController` manages operations related to quiz questions. It provid
   - Response: `ResponseEntity<List<Questions>>`
 
 - **Add a Question**
-
   - Endpoint: `POST /question/add`
   - Description: Adds a new question.
   - Request Body: `Questions` object containing the question details.
-  - {
-      "title": "string",
+  - Example:
+    ```json
+    {
+      "qusetionTitle": "string",
       "option1": "String",
       "option2": "String",
       "option3": "String",
-      "option3": "String",
+      "option4": "String",
       "rightAnswer": "String",
       "difficultyLevel": "String",
       "category": "String"
     }
-
+    ```
   - Response: `ResponseEntity<String>`
 
 - **Delete a Question**
-
   - Endpoint: `DELETE /question/delete/{id}`
   - Description: Deletes a question by its ID.
   - Path Variable: 
@@ -55,10 +53,9 @@ The `QuestionController` manages operations related to quiz questions. It provid
 The `QuizController` manages operations related to quizzes. It provides the following endpoints:
 
 - **Create a Quiz**
-
   - Endpoint: `POST /quiz/create?category={category}&numOfQuestions={numOfQuestions}&difficultyLevel={difficultyLevel}&title={your title}`
   - Description: Creates a new quiz.
-  - Request Parameters*:
+  - Request Parameters:
     - `category` (String): The category of the quiz.
     - `numOfQuestions` (int): Number of questions in the quiz.
     - `difficultyLevel` (String): Difficulty level of the quiz.
@@ -66,7 +63,6 @@ The `QuizController` manages operations related to quizzes. It provides the foll
   - Response: `ResponseEntity<String>`
 
 - **Get Quiz Questions**
-
   - Endpoint: `GET /quiz/get/{id}`
   - Description: Fetches questions for the specified quiz.
   - Path Variable: 
@@ -74,30 +70,69 @@ The `QuizController` manages operations related to quizzes. It provides the foll
   - Response: `ResponseEntity<List<QuestionWrapper>>`
 
 - **Submit a Quiz**
-
   - Endpoint: `POST /quiz/submit/{id}`
   - Description: Submits responses for the specified quiz and calculates the result.
   - Path Variable: 
     - `id` (Integer): The ID of the quiz.
   - Request Body: List of `ResponseWrapper` objects containing the responses.
-  - {
-        "id": Integer,
-        "response":"String"
+  - Example:
+    ```json
+    {
+      "id": Integer,
+      "response": "String"
     }
+    ```
   - Response: `ResponseEntity<Integer>`
 
 ## Technologies Used
 
 - Spring Boot: Framework for building the application.
 - Java: Programming language used for development.
-- MySql: DB used for storing and retrieving qustions and quizes.
+- MySQL: Database used for storing and retrieving questions and quizzes.
 
-## How to Run
+## Docker Setup
 
-1. Clone the repository.
-2. Navigate to the project directory.
-3. Run the application using your preferred IDE or command line with `mvn spring-boot:run`.
+### Prerequisites
 
----
+Ensure you have Docker installed on your machine. You can download and install Docker from [Docker's official website](https://www.docker.com/products/docker-desktop).
 
-Feel free to reach out for any queries or contributions. Enjoy using the Quiz App!
+### Setup
+
+ **Create a Docker Network:**
+   ```sh
+   docker network create quizapp-network
+   ```
+ **Run MySQL Container:**
+   ```sh
+   docker run --name mysql-container --network quizapp-network -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=quizapp -p 3307:3306 -d mysql:latest
+   ```
+ **Build and Run Quiz App Container:**
+
+  - Navigate to the project directory where your Dockerfile is located.
+  - Build the Docker image:
+       ```sh
+         docker build -t quizapp .
+       ```
+  - Run the Docker containe:
+      ```sh
+        docker run --name quiz-app --network quizapp-network -p 8080:8080 -d quizapp
+       ```
+      
+  **Verify Containers:**
+
+  - Check if the containers are running and connected
+      ```sh
+         docker ps
+       ```
+      ```sh
+         docker network inspect quizapp-network
+      ```
+You should see both quiz-app and mysql-container connected to the quizapp-network.
+
+  **How to Run:**
+  - Clone the repository.
+  - Navigate to the project directory.
+  - Follow the Docker setup steps to build and run the containers.
+  - Access the application at http://localhost:8080.
+    
+   
