@@ -96,7 +96,30 @@ The `QuizController` manages operations related to quizzes. It provides the foll
 
 Ensure you have Docker installed on your machine. You can download and install Docker from [Docker's official website](https://www.docker.com/products/docker-desktop).
 
-### Setup
+### Setup with Docker Compose
+
+   
+**Build and run the containers using Docker Compose:**
+
+    ```sh
+    docker-compose up --build
+    ```
+    
+**Verify that the containers are running and connected to the `quizapp-network`:**
+
+    ```sh
+    docker ps
+    docker network inspect quizapp-network
+    ```
+    
+**To stop and restart:**
+
+  ```sh
+    docker-compose down
+    docker-compose up -d
+  ```
+
+###Setup in cmd for testing purposes
 
  **Create a Docker Network:**
    ```sh
@@ -129,10 +152,16 @@ Ensure you have Docker installed on your machine. You can download and install D
       ```
 You should see both quiz-app and mysql-container connected to the quizapp-network.
 
-  **How to Run:**
-  - Clone the repository.
-  - Navigate to the project directory.
-  - Follow the Docker setup steps to build and run the containers.
-  - Access the application at http://localhost:8080.
-    
-   
+ ### Access the Application
+
+Once the containers are up and running, you can access the application at [http://localhost:8080](http://localhost:8080).
+
+## How to Run without Docker
+
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Run the application using your preferred IDE or command line with `mvn spring-boot:run`.
+
+---
+
+Feel free to reach out for any queries or contributions. Enjoy using the Quiz App!
