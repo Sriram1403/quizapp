@@ -1,0 +1,33 @@
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: quizapp
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - quizapp-network
+
+  quizapp:
+    image: quizapp
+    container_name: quiz-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - quizapp-network
+
+volumes:
+  mysql_data:
+
+networks:
+  quizapp-network:
+    driver: bridge

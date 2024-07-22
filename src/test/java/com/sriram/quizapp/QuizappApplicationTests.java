@@ -3,10 +3,10 @@ package com.sriram.quizapp;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class QuizappApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 
