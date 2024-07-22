@@ -92,12 +92,61 @@ The `QuizController` manages operations related to quizzes. It provides the foll
 - Java: Programming language used for development.
 - MySql: DB used for storing and retrieving qustions and quizes.
 
-## How to Run
+## Docker Setup
+Prerequisites
+Ensure you have Docker installed on your machine. You can download and install Docker from Docker's official website.
 
-1. Clone the repository.
-2. Navigate to the project directory.
-3. Run the application using your preferred IDE or command line with `mvn spring-boot:run`.
+Setup
+Create a Docker Network:
 
----
+sh
+Copy code
+docker network create quizapp-network
+Run MySQL Container:
+
+sh
+Copy code
+docker run --name mysql-container --network quizapp-network -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=quizapp -p 3307:3306 -d mysql:latest
+Build and Run Quiz App Container:
+
+Navigate to the project directory where your Dockerfile is located.
+
+Build the Docker image:
+
+sh
+Copy code
+docker build -t quizapp .
+Run the Docker container:
+
+sh
+Copy code
+docker run --name quiz-app --network quizapp-network -p 8080:8080 -d quizapp
+Verify Containers:
+
+Check if the containers are running and connected:
+
+sh
+Copy code
+docker ps
+sh
+Copy code
+docker network inspect quizapp-network
+You should see both quiz-app and mysql-container connected to the quizapp-network.
+
+How to Run
+Clone the repository.
+Navigate to the project directory.
+Follow the Docker setup steps to build and run the containers.
+Access the application at http://localhost:8080.
+
 
 Feel free to reach out for any queries or contributions. Enjoy using the Quiz App!
+
+
+
+
+
+
+
+
+
