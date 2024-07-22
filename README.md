@@ -119,7 +119,7 @@ Ensure you have Docker installed on your machine. You can download and install D
     docker-compose up -d
   ```
 
-###Setup in cmd for testing purposes
+### Setup in cmd for testing purposes
 
  **Create a Docker Network:**
    ```sh
