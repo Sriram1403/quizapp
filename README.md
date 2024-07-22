@@ -101,16 +101,16 @@ Ensure you have Docker installed on your machine. You can download and install D
    
 **Build and run the containers using Docker Compose:**
 
-    ```sh
+  ```sh
     docker-compose up --build
-    ```
+  ```
     
 **Verify that the containers are running and connected to the `quizapp-network`:**
 
-    ```sh
+  ```sh
     docker ps
     docker network inspect quizapp-network
-    ```
+   ```
     
 **To stop and restart:**
 
