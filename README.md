@@ -123,11 +123,11 @@ Ensure you have Docker installed on your machine. You can download and install D
 
  **Create a Docker Network:**
    ```sh
-   docker network create quizapp-network
+     docker network create quizapp-network
    ```
  **Run MySQL Container:**
    ```sh
-   docker run --name mysql-container --network quizapp-network -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=quizapp -p 3307:3306 -d mysql:latest
+     docker run --name mysql-container --network quizapp-network -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=quizapp -p 3307:3306 -d mysql:latest
    ```
  **Build and Run Quiz App Container:**
 
